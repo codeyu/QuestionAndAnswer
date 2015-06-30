@@ -1,0 +1,45 @@
+﻿@model IEnumerable<QuestionAndAnswer.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionCreator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionCreateTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionCreator)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionCreateTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.QuestionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.QuestionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionId })
+        </td>
+    </tr>
+}
+
+</table>
