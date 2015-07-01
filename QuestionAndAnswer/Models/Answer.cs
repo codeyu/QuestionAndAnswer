@@ -13,6 +13,8 @@ namespace QuestionAndAnswer.Models
         // 外键，答案对应的问题的ID
         public virtual int QuestionId { get; set; }
 
+        public virtual string AnswerCreator { get; set; }
+
         // 答案内容
         public virtual string AnswerContent { get; set; }
 

@@ -36,6 +36,18 @@ namespace QuestionAndAnswer.Controllers
             return View(question);
         }
 
+        public ActionResult CreateAnswer([Bind(Include = "AnswerId, AnswerCreator, QuestionId, AnswerContent")] Answer answer )
+        {
+            if (ModelState.IsValid)
+            {
+                answer.AnswerTime = DateTime.Now;
+                db.Answers.Add(answer);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { 
+                id = answer.QuestionId });
+        }
+
         // GET: QuestionsAndAnswer/Create
         public ActionResult Create()
         {
@@ -47,11 +59,11 @@ namespace QuestionAndAnswer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuestionId, QuestionCreator, QuestionContent")] Question question, string creator)
+        public ActionResult Create([Bind(Include = "QuestionId, QuestionCreator, QuestionContent")] Question question)
         {
+            ViewBag.Answers = new Answer();
             if (ModelState.IsValid)
             {
-                //question.QuestionCreator = User.Identity.GetUserName();
                 question.QuestionCreateTime = DateTime.Now;
                 db.Questions.Add(question);
                 db.SaveChanges();

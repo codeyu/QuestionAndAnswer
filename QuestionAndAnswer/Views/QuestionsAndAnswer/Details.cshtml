@@ -1,7 +1,12 @@
-﻿@model QuestionAndAnswer.Models.Question
+﻿@using Microsoft.AspNet.Identity
+@using QuestionAndAnswer.Models;
+@model QuestionAndAnswer.Models.Question
 
 @{
     ViewBag.Title = "Details";
+    string creator = User.Identity.GetUserName();
+    int questionId = Model.QuestionId;
+    Answer answer = ViewBag.Answers;
 }
 
 <h2>Details</h2>
@@ -40,3 +45,52 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<hr />
+<div>
+    <h4>回答</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        @foreach(Answer answers in Model.Answers)
+        {
+            <dt>@answers.AnswerCreator</dt>
+            <dd>@answers.AnswerContent</dd>
+        }
+
+        
+    </dl>
+</div>
+
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dd>    
+        @using (Html.BeginForm("CreateAnswer", "QuestionsAndAnswer"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.Hidden("answer.AnswerCreator", creator)
+                @Html.Hidden("answer.QuestionId", questionId)
+                
+                <div class="form-group">
+                    @Html.Label("", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => answer.AnswerContent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => answer.AnswerContent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class=" col-md-10">
+                        <input type="submit" value="发布回答" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        </dd>
+    </dl>
+</div>
