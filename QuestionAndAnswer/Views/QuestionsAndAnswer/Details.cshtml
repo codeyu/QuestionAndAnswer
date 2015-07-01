@@ -3,16 +3,14 @@
 @model QuestionAndAnswer.Models.Question
 
 @{
-    ViewBag.Title = "Details";
     string creator = User.Identity.GetUserName();
     int questionId = Model.QuestionId;
     Answer answer = ViewBag.Answers;
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>Question</h4>
+    <h4>问题</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -46,7 +44,6 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-<hr />
 <div>
     <h4>回答</h4>
     <hr />
