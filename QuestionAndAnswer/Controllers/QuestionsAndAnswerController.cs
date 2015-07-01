@@ -10,6 +10,7 @@ using QuestionAndAnswer.Models;
 
 namespace QuestionAndAnswer.Controllers
 {
+    [Authorize]
     public class QuestionsAndAnswerController : Controller
     {
         private QuestionAndAnswerDB db = new QuestionAndAnswerDB();
@@ -46,10 +47,12 @@ namespace QuestionAndAnswer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuestionId,QuestionCreator,QuestionContent,QuestionCreateTime")] Question question)
+        public ActionResult Create([Bind(Include = "QuestionId, QuestionCreator, QuestionContent")] Question question, string creator)
         {
             if (ModelState.IsValid)
             {
+                //question.QuestionCreator = User.Identity.GetUserName();
+                question.QuestionCreateTime = DateTime.Now;
                 db.Questions.Add(question);
                 db.SaveChanges();
                 return RedirectToAction("Index");

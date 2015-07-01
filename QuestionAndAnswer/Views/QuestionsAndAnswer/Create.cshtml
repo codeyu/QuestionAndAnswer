@@ -1,7 +1,10 @@
-﻿@model QuestionAndAnswer.Models.Question
+﻿@using Microsoft.AspNet.Identity
+@model QuestionAndAnswer.Models.Question
 
 @{
     ViewBag.Title = "Create";
+
+    string creator = User.Identity.GetUserName();
 }
 
 <h2>Create</h2>
@@ -15,14 +18,15 @@
         <h4>Question</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.QuestionCreator, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QuestionCreator, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.QuestionCreator, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
+        @Html.Hidden("QuestionCreator", creator)
         <div class="form-group">
             @Html.LabelFor(model => model.QuestionContent, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -31,13 +35,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.QuestionCreateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QuestionCreateTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.QuestionCreateTime, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
