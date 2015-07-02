@@ -9,7 +9,8 @@
 <p>
     @Html.ActionLink("提问题", "Create",null, null, new {@class = "btn btn-link"})
 </p>
-<table class="table">
+<table class="table table-striped">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.QuestionCreator)
@@ -21,25 +22,35 @@
             @Html.DisplayNameFor(model => model.QuestionCreateTime)
         </th>
         <th></th>
+        <th></th>
     </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionCreator)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionCreateTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuestionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuestionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionId })
-        </td>
-    </tr>
-}
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionCreator)
+                </td>
+                <td>
+                    @Html.ActionLink(item.QuestionContent, "Details", new { id = item.QuestionId })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionCreateTime)
+                </td>
+                
+                <td>
+                    @Html.ActionLink(item.Answers.Count + "个回答", "Details", new { id = item.QuestionId })
+                </td>
+                
+                <td>
+                    @*@Html.ActionLink("详情", "Details", new { id = item.QuestionId }) |*@
+                    @Html.ActionLink("编辑", "Edit", new { id = item.QuestionId }) |
+                    @Html.ActionLink("删除", "Delete", new { id = item.QuestionId })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
