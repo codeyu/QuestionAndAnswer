@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuestionAndAnswer.Models;
 
 namespace QuestionAndAnswer.Controllers
@@ -16,9 +17,14 @@ namespace QuestionAndAnswer.Controllers
         private QuestionAndAnswerDB db = new QuestionAndAnswerDB();
 
         // GET: QuestionsAndAnswer
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Questions.ToList());
+            var questions = from q in db.Questions
+                            select q;
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            questions = questions.OrderBy(q => q.QuestionCreateTime);
+            return View(questions.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: QuestionsAndAnswer/Details/5

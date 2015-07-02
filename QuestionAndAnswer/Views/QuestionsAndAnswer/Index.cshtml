@@ -1,5 +1,6 @@
-﻿@model IEnumerable<QuestionAndAnswer.Models.Question>
-
+﻿@model PagedList.IPagedList<QuestionAndAnswer.Models.Question>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
@@ -13,13 +14,16 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.QuestionCreator)
+            @*@Html.DisplayNameFor(model => model.QuestionCreator)*@
+            提问者
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QuestionContent)
+            @*@Html.DisplayNameFor(model => model.QuestionContent)*@
+            问题内容
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QuestionCreateTime)
+            @*@Html.DisplayNameFor(model => model.QuestionCreateTime)*@
+            创建时间
         </th>
         <th></th>
         <th></th>
@@ -54,3 +58,8 @@
     </tbody>
 
 </table>
+<br />
+
+第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
