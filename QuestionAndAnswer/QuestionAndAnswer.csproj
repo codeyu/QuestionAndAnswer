@@ -181,6 +181,14 @@
     <Compile Include="Migrations\201507011152094_AddFiledToAnswerModle.Designer.cs">
       <DependentUpon>201507011152094_AddFiledToAnswerModle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507031215379_AnswerValidation.cs" />
+    <Compile Include="Migrations\201507031215379_AnswerValidation.Designer.cs">
+      <DependentUpon>201507031215379_AnswerValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507031220027_QustionValidation.cs" />
+    <Compile Include="Migrations\201507031220027_QustionValidation.Designer.cs">
+      <DependentUpon>201507031220027_QustionValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -188,7 +196,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionAndAnswerDB.cs" />
-    <Compile Include="Models\QuestionDetailsViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -197,6 +204,7 @@
     <Content Include="App_Data\QuestionAndAnswerDB-20150630215610_log.ldf">
       <DependentUpon>QuestionAndAnswerDB-20150630215610.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\App\TextArea.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -258,6 +266,7 @@
     <Content Include="Views\QuestionsAndAnswer\Details.cshtml" />
     <Content Include="Views\QuestionsAndAnswer\Edit.cshtml" />
     <Content Include="Views\QuestionsAndAnswer\Index.cshtml" />
+    <Content Include="Views\QuestionsAndAnswer\AnswerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507010757261_InitialCreate.resx">
@@ -265,6 +274,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507011152094_AddFiledToAnswerModle.resx">
       <DependentUpon>201507011152094_AddFiledToAnswerModle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507031215379_AnswerValidation.resx">
+      <DependentUpon>201507031215379_AnswerValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507031220027_QustionValidation.resx">
+      <DependentUpon>201507031220027_QustionValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +289,7 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

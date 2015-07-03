@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuestionAndAnswer.Models
 {
@@ -16,6 +17,7 @@ namespace QuestionAndAnswer.Models
         public virtual string AnswerCreator { get; set; }
 
         // 答案内容
+        [Required]
         public virtual string AnswerContent { get; set; }
 
         // 问题回答时间

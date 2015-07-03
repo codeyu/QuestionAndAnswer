@@ -1,13 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@using QuestionAndAnswer.Models;
-@model QuestionAndAnswer.Models.Question
-
-@{
-    string creator = User.Identity.GetUserName();
-    int questionId = Model.QuestionId;
-    Answer answer = ViewBag.Answers;
-}
-
+﻿@model QuestionAndAnswer.Models.Question
 
 <div>
     <h4>问题</h4>
@@ -49,45 +40,17 @@
     <hr />
     <dl class="dl-horizontal">
 
-        @foreach(Answer answers in Model.Answers)
+        @foreach(var answers in Model.Answers)
         {
             <dt>@answers.AnswerCreator</dt>
             <dd>@answers.AnswerContent</dd>
         }
-
         
     </dl>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">更多</button>
 </div>
 
 <hr />
 <div>
-    <dl class="dl-horizontal">
-        <dd>    
-        @using (Html.BeginForm("CreateAnswer", "QuestionsAndAnswer"))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                @Html.Hidden("answer.AnswerCreator", creator)
-                @Html.Hidden("answer.QuestionId", questionId)
-                
-                <div class="form-group">
-                    @Html.Label("", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => answer.AnswerContent, htmlAttributes: new { @class = "form-control", @rows = 3 })
-                        @Html.ValidationMessageFor(model => answer.AnswerContent, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class=" col-md-10">
-                        <input type="submit" value="发布回答" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-        }
-        </dd>
-    </dl>
+    @{Html.RenderPartial("AnswerPartial", new QuestionAndAnswer.Models.Answer());}
 </div>

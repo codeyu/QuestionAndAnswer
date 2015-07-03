@@ -16,6 +16,7 @@ namespace QuestionAndAnswer.Models
 
         // 问题内容
         [Display(Name = "问题内容")]
+        [Required]
         public virtual string QuestionContent { get; set; }
 
         // 问题创建时间

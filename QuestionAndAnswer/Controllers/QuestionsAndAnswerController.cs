@@ -34,7 +34,7 @@ namespace QuestionAndAnswer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Find(id);
+            var question = db.Questions.Find(id);
             if (question == null)
             {
                 return HttpNotFound();
@@ -42,7 +42,7 @@ namespace QuestionAndAnswer.Controllers
             return View(question);
         }
 
-        public ActionResult CreateAnswer([Bind(Include = "AnswerId, AnswerCreator, QuestionId, AnswerContent")] Answer answer )
+        public ActionResult CreateAnswer([Bind(Include = "AnswerId, AnswerCreator, QuestionId, AnswerContent")] Answer answer)
         {
             if (ModelState.IsValid)
             {
