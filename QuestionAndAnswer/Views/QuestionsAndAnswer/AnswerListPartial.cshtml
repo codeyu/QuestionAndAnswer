@@ -1,0 +1,13 @@
+﻿@model IList<QuestionAndAnswer.Models.Answer>
+
+<h4>回答</h4>
+<hr />
+<dl class="dl-horizontal">
+
+    @foreach (var answers in Model)
+    {
+        <dt>@answers.AnswerCreator</dt>
+        <dd>@answers.AnswerContent</dd>
+    }
+
+</dl>

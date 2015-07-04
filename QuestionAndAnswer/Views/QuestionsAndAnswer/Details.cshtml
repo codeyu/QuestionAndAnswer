@@ -1,5 +1,11 @@
 ﻿@model QuestionAndAnswer.Models.Question
 
+@{
+      var answerList = new List<QuestionAndAnswer.Models.Answer>();
+      answerList = Model.Answers;
+      var questionId = Model.QuestionId;
+}
+
 <div>
     <h4>问题</h4>
     <hr />
@@ -35,22 +41,30 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-<div>
-    <h4>回答</h4>
-    <hr />
-    <dl class="dl-horizontal">
+<div id="answerList">
+    @{Html.RenderPartial("AnswerListPartial", Model.Answers);}
+</div>
 
-        @foreach(var answers in Model.Answers)
+<div id="moreAnswer">
+    @Ajax.ActionLink("更多答案",
+        "MoreAnswer",
+        null,
+        new { id = questionId },
+        new AjaxOptions
         {
-            <dt>@answers.AnswerCreator</dt>
-            <dd>@answers.AnswerContent</dd>
-        }
-        
-    </dl>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">更多</button>
+            UpdateTargetId = "answerList",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "GET"
+        },
+        new { @class = "btn btn-lg btn-primary btn-block" })
 </div>
 
 <hr />
 <div>
-    @{Html.RenderPartial("AnswerPartial", new QuestionAndAnswer.Models.Answer());}
+    @{Html.RenderPartial("AnswerPartial", new QuestionAndAnswer.Models.Answer(), new ViewDataDictionary {{ "questionId", questionId}});}
 </div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.10.2.min"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

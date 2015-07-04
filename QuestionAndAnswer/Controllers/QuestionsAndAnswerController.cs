@@ -42,6 +42,22 @@ namespace QuestionAndAnswer.Controllers
             return View(question);
         }
 
+        public ActionResult MoreAnswer(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var question = db.Questions.Find(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("AnswerListPartial", question.Answers);
+
+        }
+
+        [HttpPost]
         public ActionResult CreateAnswer([Bind(Include = "AnswerId, AnswerCreator, QuestionId, AnswerContent")] Answer answer)
         {
             if (ModelState.IsValid)
