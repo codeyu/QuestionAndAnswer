@@ -85,7 +85,7 @@ _ReSharper*/
 *.DotSettings.user
 
 # Migrations Files
-Migrations/
+#Migrations/
 
 # JustCode is a .NET coding addin-in
 .JustCode
