@@ -115,8 +115,9 @@ namespace QuestionAndAnswer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuestionId,QuestionCreator,QuestionContent,QuestionCreateTime")] Question question)
+        public ActionResult Edit([Bind(Include = "QuestionId,QuestionCreator,QuestionContent")] Question question)
         {
+            question.QuestionCreateTime = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Entry(question).State = EntityState.Modified;
