@@ -8,4 +8,4 @@
 
 ###开发工具为Visual Studio 2013
 
-###数据库使用Visual Studio 2013自带的LocalDb，无需额外安装数据
+###数据库使用Visual Studio 2013自带的LocalDb，无需额外安装数据库
