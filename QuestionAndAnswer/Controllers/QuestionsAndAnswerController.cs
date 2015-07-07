@@ -23,7 +23,7 @@ namespace QuestionAndAnswer.Controllers
                             select q;
             int pageSize = 5;
             int pageNumber = (page ?? 1);
-            questions = questions.OrderBy(q => q.QuestionCreateTime);
+            questions = questions.OrderByDescending(q => q.QuestionCreateTime);
             return View(questions.ToPagedList(pageNumber, pageSize));
         }
 
